@@ -1,0 +1,40 @@
+// returns an array of node values in the BST (rooted at 'root')
+// that lie in the given range [low, high]
+vector<int> printNearNodes(Node *root, int low, int high)
+{
+    // your code goes here   
+    vector<int> v;
+    Node* curr=root;
+    while(curr!=NULL)
+    {
+        if(curr->left==NULL)
+        {
+            if(curr->data>=low && curr->data<=high){
+                v.push_back(curr->data);   
+            }
+            curr=curr->right;
+        }
+        else
+        {
+            Node* prev = curr->left;
+            while(prev->right!=NULL && prev->right!=curr)
+            {
+                prev = prev->right;
+            }
+            if(prev->right==NULL)
+            {
+                prev->right = curr;
+                curr = curr->left;
+            }
+            else
+            {
+                prev->right=NULL;
+                if(curr->data>=low && curr->data<=high){
+                    v.push_back(curr->data);   
+                }
+                curr=curr->right;
+            }
+        }
+    }
+    return v;
+}
