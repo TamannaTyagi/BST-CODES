@@ -1,0 +1,22 @@
+/*The function should return the root of the modified tree*/
+Node* deleteNode(Node* root, int key)
+{
+    //Your code here
+    if(root==NULL)
+    {
+        return NULL;
+    }
+    else if(root->data==key)
+    {
+        return root->left;
+    }
+    else if(root->data>key)
+    {
+        return deleteNode(root->left,key);
+    }
+    else
+    {
+        root->right = deleteNode(root->right,key);
+        return root;
+    }
+}
