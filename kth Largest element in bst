@@ -1,0 +1,27 @@
+// return the Kth largest element in the given BST rooted at 'root'
+void kthLargestUtil(Node *root, int K,int &c,int &ans)
+{
+    if(root==NULL)
+    {
+        return ;
+    }
+    kthLargestUtil(root->right,K,c,ans);
+    c++;
+    if(K==c)
+    {
+        ans = root->data;
+    }
+    kthLargestUtil(root->left,K,c,ans);
+}
+int kthLargest(Node *root, int K)
+{
+    //Your code here
+    if(root==NULL)
+    {
+        return -1;
+    }
+    int c = 0;
+    int ans;
+    kthLargestUtil(root,K,c,ans);
+    return ans;
+}
